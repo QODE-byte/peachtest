@@ -30,7 +30,7 @@
   --shadow:0 12px 34px rgba(0,0,0,.45);--shadow-sm:0 4px 14px rgba(0,0,0,.4);
 }
 *{box-sizing:border-box} html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;line-height:1.5;min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:14px 12px 30px}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;line-height:1.5;min-height:100vh;display:flex;justify-content:center;align-items:flex-start;padding:14px 12px 92px}
 .wrap>*{flex:none}
 .wrap{width:100%;max-width:440px;display:flex;flex-direction:column;gap:11px}
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -53,7 +53,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-
 .rec .cta{font-size:10px;font-weight:800;color:var(--ink-soft);margin-top:3px} .rec.done{background:color-mix(in srgb,var(--leaf) 15%,var(--surface))} .rec.done .cta{color:var(--leaf-deep)}
 
 /* GARDEN */
-.stage{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);height:440px;touch-action:none;background:linear-gradient(180deg,var(--sky-top),var(--sky-mid) 45%,var(--sky-bot))}
+.stage{position:relative;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);height:440px;touch-action:pan-y;background:linear-gradient(180deg,var(--sky-top),var(--sky-mid) 45%,var(--sky-bot))}
 .backdrop{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .suncore{position:absolute;top:32px;right:40px;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,#FFF6D8 0%,#FFE59A 55%,rgba(255,229,154,0) 72%);opacity:.9}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .suncore{opacity:.5}}
@@ -83,6 +83,9 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-
 .deco .em{font-size:46px;display:block;filter:drop-shadow(0 4px 2px rgba(0,0,0,.2))}
 .deco::after{content:"";position:absolute;left:50%;bottom:-3px;transform:translateX(-50%);width:40px;height:11px;border-radius:50%;background:radial-gradient(ellipse,var(--leaf-mid) 0%,rgba(0,0,0,.12) 60%,transparent 72%);opacity:.7;z-index:-1}
 .deco:active{cursor:grabbing}
+.deco.sel .em{filter:drop-shadow(0 0 0 var(--peach-deep)) drop-shadow(0 4px 2px rgba(0,0,0,.2))}
+.deco-x{position:absolute;top:-10px;right:-10px;width:24px;height:24px;border-radius:50%;border:2px solid var(--surface);background:var(--peach-deep);color:#fff;font-size:15px;font-weight:800;line-height:1;cursor:pointer;box-shadow:var(--shadow-sm);opacity:0;pointer-events:none;transition:opacity .18s;display:grid;place-items:center;padding:0;z-index:3}
+.deco.sel .deco-x,.deco:hover .deco-x{opacity:1;pointer-events:auto}
 .hint-pill{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);background:color-mix(in srgb,var(--surface) 84%,transparent);backdrop-filter:blur(4px);font-size:11px;font-weight:700;color:var(--ink-soft);padding:5px 12px;border-radius:999px;z-index:7;white-space:nowrap;max-width:92%}
 .spark{position:absolute;width:8px;height:8px;border-radius:50%;background:#FFE9A8;pointer-events:none;animation:spk 1s ease-out forwards;z-index:8}
 @keyframes spk{0%{transform:scale(0);opacity:1}100%{transform:scale(1.6) translateY(-22px);opacity:0}}
@@ -107,7 +110,12 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-
 .chip .nm{font-size:11px;font-weight:800;line-height:1.15} .chip .nm small{color:var(--ink-faint);font-weight:700;font-size:9px} .chip .ct{margin-left:auto;font-size:13px;font-weight:800;color:var(--peach-deep);font-variant-numeric:tabular-nums} .chip.locked{opacity:.45}
 .nextday{width:100%;border:none;border-radius:15px;padding:13px;font-family:inherit;font-size:13px;font-weight:800;cursor:pointer;background:var(--ink);color:var(--bg);transition:filter .2s,transform .12s} .nextday:hover{filter:brightness(1.12)} .nextday:active{transform:translateY(1px)}
 .foot{font-size:11px;color:var(--ink-faint);text-align:center}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:14px;font-size:13px;font-weight:700;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;max-width:86vw;text-align:center;z-index:60} .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.botnav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:440px;display:flex;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(8px);border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(120,70,55,.10);z-index:70;padding:6px 6px calc(6px + env(safe-area-inset-bottom))}
+.botnav button{flex:1;border:none;background:none;font-family:inherit;color:var(--ink-soft);font-size:10px;font-weight:800;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 2px;cursor:pointer;border-radius:12px;transition:background .15s,color .15s}
+.botnav button .ic{font-size:20px;line-height:1}
+.botnav button.on{color:var(--peach-deep)} .botnav button:active{background:var(--surface-2)}
+.botnav button:focus-visible{outline:2px solid var(--peach);outline-offset:-2px}
+.toast{position:fixed;left:50%;bottom:92px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:14px;font-size:13px;font-weight:700;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;max-width:86vw;text-align:center;z-index:60} .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .modal{position:fixed;inset:0;background:rgba(40,25,30,.55);display:grid;place-items:center;padding:20px;z-index:100;transition:opacity .3s} .modal.hide{opacity:0;pointer-events:none}
 .sheet{background:var(--surface);border-radius:24px;max-width:360px;width:100%;padding:26px 24px;box-shadow:var(--shadow);text-align:center} .sheet .big{font-size:44px} .sheet h2{margin:2px 0 4px;font-size:20px;font-weight:800} .sheet p{margin:0 0 15px;font-size:13px;color:var(--ink-soft)}
 .steps3{display:flex;flex-direction:column;gap:9px;text-align:left;margin-bottom:18px} .s3{display:flex;gap:11px;align-items:center;background:var(--surface-2);border-radius:14px;padding:10px 13px} .s3 .n{width:25px;height:25px;border-radius:50%;background:var(--peach);color:#fff;font-weight:800;font-size:12px;display:grid;place-items:center;flex:none} .s3 .tx{font-size:12px;font-weight:600} .s3 .tx b{font-weight:800}
@@ -203,12 +211,12 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-
     <div class="items" id="items"></div>
   </div></div>
 
-  <div class="card"><h2>성장 단계</h2><div class="steps" id="steps">
+  <div class="card" id="growCard"><h2>성장 단계</h2><div class="steps" id="steps">
     <div class="step" data-s="1"><span class="em">🌱</span><span class="lb">묘목</span></div><span class="arrow">›</span>
     <div class="step" data-s="2"><span class="em">🌿</span><span class="lb">성목</span></div><span class="arrow">›</span>
     <div class="step" data-s="3"><span class="em">🌳</span><span class="lb">큰나무</span></div></div></div>
   <div class="tonight"><h3>🌙 밤새 익는 중…</h3><div class="rb"></div><div class="msg" id="tonightMsg"></div></div>
-  <div class="card"><h2>복숭아 도감 <span class="cnt" id="dexCnt">0 / 4</span></h2><div class="chips">
+  <div class="card" id="dexCard"><h2>복숭아 도감 <span class="cnt" id="dexCnt">0 / 4</span></h2><div class="chips">
     <div class="chip act locked" id="dex-act"><span class="dot"></span><span class="nm">복숭아 잼<br><small>활동</small></span><span class="ct">0</span></div>
     <div class="chip sleep locked" id="dex-sleep"><span class="dot"></span><span class="nm">복숭아 우유<br><small>수면</small></span><span class="ct">0</span></div>
     <div class="chip food locked" id="dex-food"><span class="dot"></span><span class="nm">복숭아 파이<br><small>식단</small></span><span class="ct">0</span></div>
@@ -217,6 +225,13 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-
   <button class="nextday" onclick="nextDay()">🌙 하루 마치고 다음 날로 (DAY <span id="dayNum">1</span>)</button>
   <div class="foot">프로토타입 목업 · 소품은 이모지 플레이스홀더(실제 아트 교체 예정)</div>
 </div>
+
+<nav class="botnav" id="botnav">
+  <button class="on" data-t="stage" onclick="goTo('stage')"><span class="ic">🏠</span>마이트리</button>
+  <button data-t="shop" onclick="goTo('shop',true)"><span class="ic">🛍️</span>상점</button>
+  <button data-t="dexCard" onclick="goTo('dexCard')"><span class="ic">📖</span>도감</button>
+  <button data-t="growCard" onclick="goTo('growCard')"><span class="ic">🌳</span>성장</button>
+</nav>
 
 <div class="toast" id="toast"></div>
 <div class="modal" id="modal"><div class="sheet">
@@ -266,13 +281,14 @@ function nextDay(){
 }
 function sparkle(){const st=document.getElementById('stage');for(let k=0;k<6;k++){const s=document.createElement('div');s.className='spark';s.style.left=(42+Math.random()*16)+'%';s.style.top=(30+Math.random()*16)+'%';st.appendChild(s);setTimeout(()=>s.remove(),1000);}}
 function makeDraggable(el,d){
-  let moved=false;
-  el.addEventListener('pointerdown',e=>{el.setPointerCapture(e.pointerId);el._drag=true;moved=false;el.style.zIndex=30;e.stopPropagation();});
-  el.addEventListener('pointermove',e=>{if(!el._drag)return;moved=true;const st=document.getElementById('stage').getBoundingClientRect();let x=(e.clientX-st.left)/st.width*100,y=(e.clientY-st.top)/st.height*100;x=Math.max(6,Math.min(94,x));y=Math.max(60,Math.min(97,y));d.x=x;d.y=y;el.style.left=x+'%';el.style.top=y+'%';});
-  const end=()=>{el._drag=false;el.style.zIndex='';};
-  el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);
+  let sx=0,sy=0,moved=false;
+  el.addEventListener('pointerdown',e=>{el.setPointerCapture(e.pointerId);el._drag=true;moved=false;sx=e.clientX;sy=e.clientY;el.style.zIndex=30;e.preventDefault();e.stopPropagation();});
+  el.addEventListener('pointermove',e=>{if(!el._drag)return;if(Math.abs(e.clientX-sx)>4||Math.abs(e.clientY-sy)>4)moved=true;const st=document.getElementById('stage').getBoundingClientRect();let x=(e.clientX-st.left)/st.width*100,y=(e.clientY-st.top)/st.height*100;x=Math.max(6,Math.min(94,x));y=Math.max(60,Math.min(97,y));d.x=x;d.y=y;el.style.left=x+'%';el.style.top=y+'%';});
+  el.addEventListener('pointerup',()=>{el._drag=false;el.style.zIndex='';if(!moved){document.querySelectorAll('.deco.sel').forEach(o=>{if(o!==el)o.classList.remove('sel');});el.classList.toggle('sel');}});
+  el.addEventListener('pointercancel',()=>{el._drag=false;el.style.zIndex='';});
   el.addEventListener('dblclick',e=>{e.stopPropagation();removeDeco(d.id);});
 }
+function goTo(id,openShop){if(openShop&&!S.shopOpen)toggleShop();const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});[...document.querySelectorAll('.botnav button')].forEach(b=>b.classList.toggle('on',b.dataset.t===id));}
 let lastStage=0;
 function render(animate){
   document.getElementById('dayNum').textContent=S.day;
@@ -288,7 +304,7 @@ function render(animate){
   S.peaches.forEach(p=>{let el=box.querySelector('[data-id="'+p.id+'"]');if(!el){el=document.createElement('button');el.dataset.id=p.id;el.innerHTML=peachSVG();el.onclick=(ev)=>{ev.stopPropagation();pickPeach(p.id);};box.appendChild(el);}el.className='peach ripe '+p.color;el.style.left=p.x+'%';el.style.top=p.y+'%';el.setAttribute('aria-label',RECIPE[p.color]+' 수확');});
   const dbox=document.getElementById('decos');const dn=new Set(S.decos.map(d=>d.id));
   [...dbox.children].forEach(c=>{if(!dn.has(+c.dataset.id))c.remove();});
-  S.decos.forEach(d=>{let el=dbox.querySelector('[data-id="'+d.id+'"]');if(!el){el=document.createElement('div');el.dataset.id=d.id;el.className='deco';el.innerHTML='<span class="em">'+d.em+'</span>';el.title="드래그로 이동 · 더블클릭으로 회수";dbox.appendChild(el);makeDraggable(el,d);}el.style.left=d.x+'%';el.style.top=d.y+'%';});
+  S.decos.forEach(d=>{let el=dbox.querySelector('[data-id="'+d.id+'"]');if(!el){el=document.createElement('div');el.dataset.id=d.id;el.className='deco';el.innerHTML='<span class="em">'+d.em+'</span><button class="deco-x" aria-label="회수">×</button>';el.title="끌어서 이동 · 탭 후 ×로 회수";const xb=el.querySelector('.deco-x');xb.addEventListener('pointerdown',ev=>ev.stopPropagation());xb.addEventListener('click',ev=>{ev.stopPropagation();removeDeco(d.id);});dbox.appendChild(el);makeDraggable(el,d);}el.style.left=d.x+'%';el.style.top=d.y+'%';});
   const hb=document.getElementById('harvestBtn');const rn=S.peaches.length;hb.disabled=!rn;hb.textContent=rn?("모두 수확 🍑 × "+rn):"수확 🍑 0";
   const ib=document.getElementById('items');if(!ib.children.length){SHOP.forEach(s=>{const b=document.createElement('button');b.className='item';b.dataset.k=s.k;b.innerHTML='<span class="em">'+s.em+'</span><span class="nm">'+s.nm+'</span><span class="pr">'+s.pr+'</span>';b.onclick=()=>buy(s.k);ib.appendChild(b);});}
   [...ib.children].forEach(b=>{const s=SHOP.find(x=>x.k===b.dataset.k);b.disabled=S.coin<s.pr;});
@@ -296,7 +312,7 @@ function render(animate){
   document.getElementById('dexCnt').textContent=total+" / 4";
   const hp=document.getElementById('hintPill');
   if(S.peaches.length) hp.textContent="🍑 복숭아 "+S.peaches.length+"개 — 톡 눌러 수확하거나 나무를 흔들어요";
-  else if(S.decos.length) hp.textContent="🌷 소품을 드래그해 배치 · 더블클릭으로 회수";
+  else if(S.decos.length) hp.textContent="🌷 소품을 끌어 배치 · 탭 후 ×로 회수";
   else if(S.coin>=40) hp.textContent="🛍️ 상점에서 소품을 사서 정원을 꾸며보세요";
   else hp.textContent="위에서 오늘 한 걸 체크하면 복숭아가 열려요";
   const remain=3-(S.today.act+S.today.sleep+S.today.food);
